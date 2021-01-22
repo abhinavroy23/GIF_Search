@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import SDWebImage
+import GIFInterfaces
 
-class ViewController: UIViewController {
-
+class HomeViewController: UIViewController {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+  }
 
 }
 

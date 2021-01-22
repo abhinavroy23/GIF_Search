@@ -5,6 +5,14 @@ target 'GIF Search' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  # Internal Interfaces
+  pod 'NetworkInterfaces', :path => '../NetworkInterfaces.podspec'
+  pod 'GIFFoundation', :path => '../GIFFoundation.podspec'
+  pod 'GIFInterfaces', :path => '../GIFInterfaces.podspec'
+  
+  #External Frameworks
+  pod 'SDWebImage', '~> 5.0'
+
   # Pods for GIF Search
   target 'GIF SearchTests' do
     inherit! :search_paths
