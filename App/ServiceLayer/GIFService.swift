@@ -10,6 +10,7 @@ import SDWebImage
 
 // MARK:- GIF Service : Implementation for GIFInterface - Uses `SDWebImage` factory
 struct GIFService: GIFInterface {
+  
   let cachingService : GIFCachingInterface
   
   init(cachingService: GIFCachingInterface) {
@@ -20,23 +21,17 @@ struct GIFService: GIFInterface {
   /// - Parameters:
   ///   - imageView: imageView on which the GIF needs to be shown
   ///   - url: URL for the image
-  func setGif(onImageView imageView: UIImageView, withUrl url: URL) {
+  func setGif(onImageView imageView: UIImageView, withUrl url: URL, placeholderImage: UIImage?) {
     guard let imageView = imageView as? SDAnimatedImageView else {
       fatalError("Progressive Images cannot be displayed on UIImageView!")
     }
     
-    // Step 1: Check if image exists in the cache
-    guard let image = cachingService.getCachedImage(forUrl: url) else {
-      // Step 2: Image does not exist in cache fetch image from server, store in cache and render
-      imageView.sd_setImage(with: url) { (image, error, cacheType, url) in
-        print("image: \(String(describing: image))")
-        print("error: \(String(describing: error))")
-        print("cacheType: \(cacheType)")
-        print("url: \(String(describing: url))")
-      }
-      return
-    }
-    imageView.image = image
+    /// Step1: Check if Image exists in the cache (Mixed Memory & Disk for the best performance - see Configs below in `GIFCachingService`)
+    /// Step 2 If yes, set image from the cache
+    /// Step 3: If no, download from server and set to cache
+    /// --- Since both GIFService & GIFCachingServices are powered by SDWebImage sd_setImage(_:) takes care of both steps 2 and 3
+    /// --- If we need to use any other caching service, we can injet it in GIFservice while initializing
+    imageView.sd_setImage(with: url, placeholderImage: placeholderImage, options: [.scaleDownLargeImages], completed: nil)
   }
   
   /// Method to set GIF on a image View
@@ -74,7 +69,12 @@ struct GIFService: GIFInterface {
 
 // MARK:- GIF Caching Service - Implementation for GIFCachingService - Uses `SDImageCache` factory
 struct GIFCachingService {
-  static func configureCache() {
+  
+  init() {
+    self.configureCache()
+  }
+  
+  func configureCache() {
     
     /// Store some images  in memory for faster access
     SDImageCache.shared.config.shouldCacheImagesInMemory = true
@@ -96,18 +96,38 @@ struct GIFCachingService {
     
     /// Don't use iCloud to store image, store locally on device
     SDImageCache.shared.config.shouldDisableiCloud = true
+    
+    /// Set custom cache key
+    SDWebImageManager.shared.cacheKeyFilter = SDWebImageCacheKeyFilter.init(block: { (url) -> String? in
+      GIFCachingService.getCachingKey(fromURL: url)
+    })
+  }
+  
+  static func getCachingKey(fromURL url: URL?) -> String? {
+    guard let url = url, var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+    urlComponents.query = nil
+    guard let newUrl = urlComponents.url else { return nil }
+    return newUrl.absoluteString
   }
 }
 
 // MARK:- Implementation of GIFCachingInterface
 extension GIFCachingService: GIFCachingInterface {
-  
-  func getCachedImage(forUrl url: URL) -> UIImage? {
-    return SDImageCache.shared.imageFromCache(forKey: url.absoluteString)
+
+  func getCachedImage(forUrl url: URL, withCompletion completion: (_ image: UIImage?) -> ()) {
+    guard let cachingKey = GIFCachingService.getCachingKey(fromURL: url) else {
+      completion(nil)
+      return
+    }
+    let image = SDImageCache.shared.imageFromCache(forKey: cachingKey)
+    completion(image)
   }
   
   func store(image: UIImage, forUrl url: URL) {
-    /// Empty Implementattion for client `SDWebImage`
-    /// Storing in cache is handled automatically by `sd_setImage(:_)` method
+    DispatchQueue.global(qos: .default).async {
+      if let cachingKey = GIFCachingService.getCachingKey(fromURL: url) {
+        SDImageCache.shared.store(image, forKey: cachingKey, completion: nil)
+      }
+    }
   }
 }

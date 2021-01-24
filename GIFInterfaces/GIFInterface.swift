@@ -12,7 +12,7 @@ public protocol GIFInterface {
   /// - Parameters:
   ///   - imageView: imageView on which the GIF needs to be shown
   ///   - url: URL for the image
-  func setGif(onImageView imageView: UIImageView, withUrl url: URL)
+  func setGif(onImageView imageView: UIImageView, withUrl url: URL, placeholderImage: UIImage?)
   
   /// Method to set GIF on a image View
   /// - Parameters:
@@ -34,7 +34,7 @@ public protocol GIFCachingInterface {
   
   /// Returns a cached image form the cache storage - In Memory or Disk
   /// - Parameter url: url corresponding the cached image
-  func getCachedImage(forUrl url: URL) -> UIImage?
+  func getCachedImage(forUrl url: URL, withCompletion completion: (_ image: UIImage?) -> ())
   
   
   /// store an image in the cache
