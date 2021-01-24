@@ -49,15 +49,23 @@ extension GIFCollectionViewHandler: UICollectionViewDelegate, UICollectionViewDa
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let requiredWidth = UIScreen.main.bounds.size.width/2 - 15
-    return CGSize.init(width: requiredWidth, height: requiredWidth)
+    // Size of the item - For iPad display 3 columns, for iPhone display 2 columns
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      let requiredWidth = UIScreen.main.bounds.size.width/3 - 13.6
+      return CGSize.init(width: requiredWidth, height: requiredWidth)
+    } else {
+      let requiredWidth = UIScreen.main.bounds.size.width/2 - 15
+      return CGSize.init(width: requiredWidth, height: requiredWidth)
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    /// Inset between item
     return UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
   }
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    /// Hit api for next batch when user reaches is about to reach the last cell
     let totalCount = viewModel.getDataSource().gifs.count
     if indexPath.row == totalCount - 1 {
       delegate?.fetchNextBatch()

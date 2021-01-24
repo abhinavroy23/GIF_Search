@@ -11,7 +11,7 @@
 		8933DEB825BDB4900043DFFB /* GIFCollectionViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DEB725BDB4900043DFFB /* GIFCollectionViewHandler.swift */; };
 		8933DEBD25BDB4DE0043DFFB /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DEBC25BDB4DE0043DFFB /* FavouritesViewModel.swift */; };
 		8933DEC225BDB55C0043DFFB /* GIFCollectionVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */; };
-		8933DF3625BDC4580043DFFB /* GIFUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DF3525BDC4580043DFFB /* GIFUIModel.swift */; };
+		8933DF6C25BE0AF00043DFFB /* GIFUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DF6B25BE0AF00043DFFB /* GIFUIModel.swift */; };
 		89C01ECB25B9DC68006BF235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECA25B9DC68006BF235 /* AppDelegate.swift */; };
 		89C01ECD25B9DC68006BF235 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECC25B9DC68006BF235 /* SceneDelegate.swift */; };
 		89C01ECF25B9DC68006BF235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECE25B9DC68006BF235 /* HomeViewController.swift */; };
@@ -53,7 +53,7 @@
 		8933DEB725BDB4900043DFFB /* GIFCollectionViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFCollectionViewHandler.swift; sourceTree = "<group>"; };
 		8933DEBC25BDB4DE0043DFFB /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
 		8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFCollectionVMProtocol.swift; sourceTree = "<group>"; };
-		8933DF3525BDC4580043DFFB /* GIFUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFUIModel.swift; sourceTree = "<group>"; };
+		8933DF6B25BE0AF00043DFFB /* GIFUIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFUIModel.swift; sourceTree = "<group>"; };
 		89C01EC725B9DC68006BF235 /* GIF Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIF Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C01ECA25B9DC68006BF235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89C01ECC25B9DC68006BF235 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +109,24 @@
 			children = (
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8933DF6A25BE0AF00043DFFB /* UIModels */ = {
+			isa = PBXGroup;
+			children = (
+				8933DF6B25BE0AF00043DFFB /* GIFUIModel.swift */,
+			);
+			path = UIModels;
+			sourceTree = "<group>";
+		};
+		8933DF7025BE0B0A0043DFFB /* GIFCollectionViewHandling */ = {
+			isa = PBXGroup;
+			children = (
+				89F78AC325BCA5EF00E327EA /* GIFCell.swift */,
+				8933DEB725BDB4900043DFFB /* GIFCollectionViewHandler.swift */,
+				8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */,
+			);
+			path = GIFCollectionViewHandling;
 			sourceTree = "<group>";
 		};
 		89C01EBE25B9DC68006BF235 = {
@@ -185,10 +203,8 @@
 		89F78A3425BB516000E327EA /* UILayer */ = {
 			isa = PBXGroup;
 			children = (
-				89F78AC325BCA5EF00E327EA /* GIFCell.swift */,
-				8933DF3525BDC4580043DFFB /* GIFUIModel.swift */,
-				8933DEB725BDB4900043DFFB /* GIFCollectionViewHandler.swift */,
-				8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */,
+				8933DF7025BE0B0A0043DFFB /* GIFCollectionViewHandling */,
+				8933DF6A25BE0AF00043DFFB /* UIModels */,
 				89F78A6125BB66DE00E327EA /* HomeView */,
 				89F78A6025BB66DE00E327EA /* FavouritesView */,
 				89C01ED025B9DC68006BF235 /* Main.storyboard */,
@@ -381,7 +397,7 @@
 				89C01ECB25B9DC68006BF235 /* AppDelegate.swift in Sources */,
 				8933DEC225BDB55C0043DFFB /* GIFCollectionVMProtocol.swift in Sources */,
 				89C01ED525B9DC68006BF235 /* GIF_Search.xcdatamodeld in Sources */,
-				8933DF3625BDC4580043DFFB /* GIFUIModel.swift in Sources */,
+				8933DF6C25BE0AF00043DFFB /* GIFUIModel.swift in Sources */,
 				89C01ECD25B9DC68006BF235 /* SceneDelegate.swift in Sources */,
 				89F78A4F25BB54D400E327EA /* GIFService.swift in Sources */,
 				8933DEBD25BDB4DE0043DFFB /* FavouritesViewModel.swift in Sources */,

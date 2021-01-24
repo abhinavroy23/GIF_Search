@@ -37,6 +37,12 @@ struct GIFUIModel {
     self.limit = gifDataModel.pagination.count
     self.gifs.append(contentsOf: gifDataModel.data.compactMap { GIFUIResult(gifData: $0) })
   }
+  
+  mutating func flush() {
+    self.offset = 1
+    self.limit = 20
+    self.gifs = [GIFUIResult]()
+  }
 }
 
 struct GIFUIResult {

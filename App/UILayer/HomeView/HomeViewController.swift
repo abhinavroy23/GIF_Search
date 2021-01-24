@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     }
   }
   @IBOutlet weak var infinityLoaderHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var cancelBarButton: UIBarButtonItem!
   
   // MARK:- Instance Variables
   
@@ -43,6 +44,7 @@ class HomeViewController: UIViewController {
   private var isSearchActive: Bool = false {
     didSet {
       viewModel.isSearchActive = self.isSearchActive
+      cancelBarButton.isEnabled = self.isSearchActive
     }
   }
   
@@ -53,7 +55,7 @@ class HomeViewController: UIViewController {
     self.setupNavigation()
     self.fetchTrending(initialFetch: true)
   }
-
+  
   /// Configure `capabilities & viewModel` for `HomeViewController`.
   /// This  must be called before anything else in HomeViewController
   private func configureCapabilities() {
@@ -125,6 +127,9 @@ extension HomeViewController {
   
   private func setupNavigation() {
     self.navigationItem.titleView = searchBar
+    cancelBarButton.action = #selector(cancelButton)
+    cancelBarButton.target = self
+    cancelBarButton.isEnabled = self.isSearchActive
   }
   
   private func showLoadingView(_ show: Bool) {
@@ -139,22 +144,36 @@ extension HomeViewController {
 
 // MARK:- Search Bar Delegate
 extension HomeViewController: UISearchBarDelegate {
+
+  // Search for a given search text
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    if let searchText = searchBar.text, !searchText.isEmpty {
+      self.fetchSearchResults(initialFetch: true, forQuery: searchText)
+    }
+  }
   
-  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+  // Seach field did begin editing
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    self.isSearchActive = true
+    DispatchQueue.main.async { self.collectionHandler.reloadCollectionView() }
+  }
+  
+  // Search bar cancel
+  @objc func cancelButton() {
     self.searchBar.text = nil
     self.searchBar.resignFirstResponder()
+    self.isSearchActive = false
+    self.viewModel.searchDataSource.flush()
+    DispatchQueue.main.async {
+      self.collectionHandler.reloadCollectionView()
+      if self.viewModel.trendingDataSource.gifs.count > 0 {
+        self.collectionView.scrollToItem(at: IndexPath.init(row: 0, section: 0), at: .top, animated: false)
+      }
+    }
   }
-  
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    // TODO:- hit api for search
-  }
-  
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    // TODO:- Implement the logic to search after 1 second of pause
-  }
-  
 }
 
+// MARK:- Conformance to `GIFCollectionViewHandlerDelegate`
 extension HomeViewController: GIFCollectionViewHandlerDelegate {
   func fetchNextBatch() {
     if viewModel.isSearchActive, let searchText = self.searchBar.text {
