@@ -19,25 +19,24 @@ class GIFFavouriteServiceTests: XCTestCase {
   }
   
   func testAddToFavourite() {
-    favouriteService = GIFFavouritesService(cachingService: mockCachingService) // flush file
+    favouriteService = GIFFavouritesService(cachingService: mockCachingService)
     let image = SDAnimatedImage(named: "panda_mock.gif")!
     let url = URL(string: "https://media.giphy.com/media/KyBX9ektgXWve/source.gif")!
     favouriteService?.addToFavourite(image: image, url: url)
-    XCTAssertEqual(favouriteService?.getAllCachingKeys().count, 1)
+    XCTAssertEqual(favouriteService?.existsInFavourites(url: url), true)
   }
   
   func testRemoveFromFavourites() {
-    favouriteService = GIFFavouritesService(cachingService: mockCachingService) // flush file
+    favouriteService = GIFFavouritesService(cachingService: mockCachingService)
     let image = SDAnimatedImage(named: "panda_mock.gif")!
     let url = URL(string: "https://media.giphy.com/media/KyBX9ektgXWve/source.gif")!
     favouriteService?.addToFavourite(image: image, url: url)
-    XCTAssertEqual(favouriteService?.getAllCachingKeys().count, 1)
     favouriteService?.removeFromFavourite(url: url)
-    XCTAssertEqual(favouriteService?.getAllCachingKeys().count, 0)
+    XCTAssertEqual(favouriteService?.existsInFavourites(url: url), false)
   }
   
   func testExistsInFavourites() {
-    favouriteService = GIFFavouritesService(cachingService: mockCachingService) // flush file
+    favouriteService = GIFFavouritesService(cachingService: mockCachingService)
     let image = SDAnimatedImage(named: "panda_mock.gif")!
     let url = URL(string: "https://media.giphy.com/media/KyBX9ektgXWve/source.gif")!
     favouriteService?.addToFavourite(image: image, url: url)
@@ -46,7 +45,7 @@ class GIFFavouriteServiceTests: XCTestCase {
   }
   
   func testGetImage() {
-    favouriteService = GIFFavouritesService(cachingService: mockCachingService) // flush file
+    favouriteService = GIFFavouritesService(cachingService: mockCachingService)
     let image = SDAnimatedImage(named: "panda_mock.gif")!
     let url = URL(string: "https://media.giphy.com/media/KyBX9ektgXWve/source.gif")!
     favouriteService?.addToFavourite(image: image, url: url)

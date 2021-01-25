@@ -11,6 +11,7 @@ import GIFInterfaces
 protocol GIFCollectionViewHandlerDelegate: class {
   func fetchNextBatch()
   func showCellError(errorMessage: String)
+  func didTapGIF(withUIModel uiModel: GIFUIResult)
 }
 
 class GIFCollectionViewHandler: NSObject {
@@ -80,7 +81,8 @@ extension GIFCollectionViewHandler: UICollectionViewDelegate, UICollectionViewDa
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+    let gif = viewModel.getDataSource().gifs[indexPath.row]
+    delegate?.didTapGIF(withUIModel: gif)
   }
 }
 

@@ -186,6 +186,13 @@ extension HomeViewController: UISearchBarDelegate {
 // MARK:- Conformance to `GIFCollectionViewHandlerDelegate`
 extension HomeViewController: GIFCollectionViewHandlerDelegate {
   
+  func didTapGIF(withUIModel uiModel: GIFUIResult) {
+    let vc = DetailsViewController.instance(gifService: self.gifService, gifUIModel: uiModel)
+    DispatchQueue.main.async {
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
+  }
+  
   func fetchNextBatch() {
     if viewModel.isSearchActive, let searchText = self.searchBar.text {
       self.fetchSearchResults(initialFetch: false, forQuery: searchText)

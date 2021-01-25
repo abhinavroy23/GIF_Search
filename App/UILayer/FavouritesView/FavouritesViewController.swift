@@ -60,6 +60,13 @@ class FavouritesViewController: UIViewController {
 
 // MARK:- Conformance to GIFCollectionViewHandlerDelegate
 extension FavouritesViewController: GIFCollectionViewHandlerDelegate {
+  func didTapGIF(withUIModel uiModel: GIFUIResult) {
+    let vc = DetailsViewController.instance(gifService: self.gifService, gifUIModel: uiModel)
+    DispatchQueue.main.async {
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
+  }
+  
   func showCellError(errorMessage: String) {
     DispatchQueue.main.async {
       UIAlertController.showError(withMessage: errorMessage, onViewController: self)
