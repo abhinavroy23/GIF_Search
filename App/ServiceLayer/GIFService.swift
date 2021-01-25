@@ -21,7 +21,7 @@ struct GIFService: GIFInterface {
   /// - Parameters:
   ///   - imageView: imageView on which the GIF needs to be shown
   ///   - url: URL for the image
-  func setGif(onImageView imageView: UIImageView, withUrl url: URL, placeholderImage: UIImage?) {
+  func setGif(onImageView imageView: UIImageView, withUrl url: URL, placeholderImage: UIImage?, completion: @escaping ()->()) {
     guard let imageView = imageView as? SDAnimatedImageView else {
       fatalError("Progressive Images cannot be displayed on UIImageView!")
     }
@@ -31,7 +31,9 @@ struct GIFService: GIFInterface {
     /// Step 3: If no, download from server and set to cache
     /// --- Since both GIFService & GIFCachingServices are powered by SDWebImage sd_setImage(_:) takes care of both steps 2 and 3
     /// --- If we need to use any other caching service, we can injet it in GIFservice while initializing
-    imageView.sd_setImage(with: url, placeholderImage: placeholderImage, options: [.scaleDownLargeImages], completed: nil)
+    imageView.sd_setImage(with: url, placeholderImage: placeholderImage, options: [.scaleDownLargeImages]) { (_, _, _, _) in
+      completion()
+    }
   }
   
   /// Method to set GIF on a image View
@@ -113,20 +115,57 @@ struct GIFCachingService {
 
 // MARK:- Implementation of GIFCachingInterface
 extension GIFCachingService: GIFCachingInterface {
-
-  func getCachedImage(forUrl url: URL, withCompletion completion: (_ image: UIImage?) -> ()) {
-    guard let cachingKey = GIFCachingService.getCachingKey(fromURL: url) else {
-      completion(nil)
-      return
+  
+  func getCachedImage(forUrl url: URL, withCompletion completion: @escaping (_ image: UIImage?) -> ()) {
+    DispatchQueue.global(qos: .background).async {
+      guard let cachingKey = GIFCachingService.getCachingKey(fromURL: url) else {
+        completion(nil)
+        return
+      }
+      let image = SDImageCache.shared.imageFromCache(forKey: cachingKey)
+      completion(image)
     }
-    let image = SDImageCache.shared.imageFromCache(forKey: cachingKey)
-    completion(image)
   }
   
   func store(image: UIImage, forUrl url: URL) {
-    DispatchQueue.global(qos: .default).async {
+    DispatchQueue.global(qos: .background).async {
       if let cachingKey = GIFCachingService.getCachingKey(fromURL: url) {
         SDImageCache.shared.store(image, forKey: cachingKey, completion: nil)
+      }
+    }
+  }
+  
+  func remove(forUrl url: URL) {
+    DispatchQueue.global(qos: .background).async {
+      if let cachingKey = GIFCachingService.getCachingKey(fromURL: url) {
+        SDImageCache.shared.removeImage(forKey: cachingKey, withCompletion: nil)
+      }
+    }
+  }
+  
+  func getCachedImageFromDisk(forUrl url: URL, withCompletion completion: @escaping (UIImage?) -> ()) {
+    DispatchQueue.global(qos: .background).async {
+      guard let cachingKey = GIFCachingService.getCachingKey(fromURL: url) else {
+        completion(nil)
+        return
+      }
+      let image = SDImageCache.shared.imageFromDiskCache(forKey: cachingKey)
+      completion(image)
+    }
+  }
+  
+  func storeInDisk(image: UIImage, forUrl url: URL) {
+    DispatchQueue.global(qos: .background).async {
+      if let cachingKey = GIFCachingService.getCachingKey(fromURL: url), let imageData = image.sd_imageData(){
+        SDImageCache.shared.storeImageData(toDisk: imageData, forKey: cachingKey)
+      }
+    }
+  }
+  
+  func removeFromDisk(forUrl url: URL) {
+    DispatchQueue.global(qos: .background).async {
+      if let cachingKey = GIFCachingService.getCachingKey(fromURL: url) {
+        SDImageCache.shared.removeImageFromDisk(forKey: cachingKey)
       }
     }
   }

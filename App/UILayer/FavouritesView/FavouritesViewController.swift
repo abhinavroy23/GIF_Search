@@ -19,6 +19,7 @@ class FavouritesViewController: UIViewController {
   /// Capabilities
   private var gifCachingService: GIFCachingInterface!
   private var gifService: GIFInterface!
+  private var favouriteService: GIFFavouritesInterface!
   private var collectionHandler: GIFCollectionViewHandler!
   
   /// ViewModel
@@ -30,20 +31,39 @@ class FavouritesViewController: UIViewController {
     configureCapabilities()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    fetchFavourites()
+  }
+  
   /// Configure `capabilities & viewModel` for `FavouritesViewController`.
   /// This  must be called before anything else in FavouritesViewController
   private func configureCapabilities() {
     self.gifCachingService = GIFCachingService()
+    self.favouriteService = GIFFavouritesService(cachingService: self.gifCachingService)
     self.gifService = GIFService(cachingService: self.gifCachingService)
-    self.viewModel = FavouritesViewModel()
+    self.viewModel = FavouritesViewModel(favouriteService: self.favouriteService)
     self.collectionHandler = GIFCollectionViewHandler(collectionView: self.collectionView,
                                                       gifService: self.gifService,
+                                                      favouriteService: self.favouriteService,
                                                       viewModel: self.viewModel,
                                                       delegate: self)
+  }
+  
+  func fetchFavourites() {
+    viewModel.fetchFavourites {
+      collectionHandler.reloadCollectionView()
+    }
   }
 }
 
 extension FavouritesViewController: GIFCollectionViewHandlerDelegate {
+  func showCellError(errorMessage: String) {
+    DispatchQueue.main.async {
+      UIAlertController.showError(withMessage: errorMessage, onViewController: self)
+    }
+  }
+  
   func fetchNextBatch() {
     
   }

@@ -10,17 +10,20 @@ import GIFInterfaces
 
 protocol GIFCollectionViewHandlerDelegate: class {
   func fetchNextBatch()
+  func showCellError(errorMessage: String)
 }
 
 class GIFCollectionViewHandler: NSObject {
   var collectionView: UICollectionView
   var gifService: GIFInterface
+  var favouriteService: GIFFavouritesInterface
   var viewModel: GIFCollectionVMProtocol
   weak var delegate: GIFCollectionViewHandlerDelegate?
   
-  init(collectionView: UICollectionView, gifService: GIFInterface, viewModel: GIFCollectionVMProtocol, delegate: GIFCollectionViewHandlerDelegate) {
+  init(collectionView: UICollectionView, gifService: GIFInterface, favouriteService: GIFFavouritesInterface, viewModel: GIFCollectionVMProtocol, delegate: GIFCollectionViewHandlerDelegate) {
     self.collectionView = collectionView
     self.gifService = gifService
+    self.favouriteService = favouriteService
     self.viewModel = viewModel
     self.delegate = delegate
     super.init()
@@ -43,8 +46,12 @@ extension GIFCollectionViewHandler: UICollectionViewDelegate, UICollectionViewDa
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GIFCell.self), for: indexPath) as? GIFCell else { return UICollectionViewCell() }
-    let gif = viewModel.getDataSource().gifs[indexPath.row]
-    gifService.setGif(onImageView: cell.gifImageView, withUrl: gif.url, placeholderImage: UIImage.singleLoader)
+    let gifUrl = viewModel.getDataSource().gifs[indexPath.row].url
+    cell.configureCell(withUrl: gifUrl,
+                       gifService: self.gifService,
+                       delegate: self,
+                       indexPath: indexPath)
+    cell.toggleFavourite(show: favouriteService.existsInFavourites(url: gifUrl))
     return cell
   }
   
@@ -70,5 +77,34 @@ extension GIFCollectionViewHandler: UICollectionViewDelegate, UICollectionViewDa
     if indexPath.row == totalCount - 1 {
       delegate?.fetchNextBatch()
     }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+  }
+}
+
+// MARK:- Conformance to GIFCellDelegate
+extension GIFCollectionViewHandler: GIFCellDelegate {
+  
+  func didSelectFavourite(forIndexPath indexPath: IndexPath, andImage image: UIImage, cell: GIFCell) {
+    let gifUrl = viewModel.getDataSource().gifs[indexPath.row].url
+    if favouriteService.existsInFavourites(url: gifUrl) {
+      /// Image already exists in favourite - remote from favourite
+      favouriteService.removeFromFavourite(url: gifUrl)
+      DispatchQueue.main.async {
+        cell.toggleFavourite(show: false)
+      }
+    } else {
+      /// Add image to favourites
+      favouriteService.addToFavourite(image: image, url: gifUrl)
+      DispatchQueue.main.async {
+        cell.toggleFavourite(show: true)
+      }
+    }
+  }
+  
+  func showCellError(errorString: String) {
+    delegate?.showCellError(errorMessage: errorString)
   }
 }

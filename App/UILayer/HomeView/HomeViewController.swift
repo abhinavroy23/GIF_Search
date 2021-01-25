@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
   private var gifService: GIFInterface!
   private var networkService: NetworkInterface!
   private var gifApiService: GIFAPIInterface!
+  private var favoutitesService: GIFFavouritesInterface!
   private var collectionHandler: GIFCollectionViewHandler!
   
   /// ViewModel
@@ -56,6 +57,11 @@ class HomeViewController: UIViewController {
     self.fetchTrending(initialFetch: true)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    collectionHandler.reloadCollectionView()
+  }
+  
   /// Configure `capabilities & viewModel` for `HomeViewController`.
   /// This  must be called before anything else in HomeViewController
   private func configureCapabilities() {
@@ -63,9 +69,11 @@ class HomeViewController: UIViewController {
     self.gifService = GIFService(cachingService: self.gifCachingService)
     self.networkService = GIFNetworkService()
     self.gifApiService = GIFAPIService(networkService: self.networkService)
+    self.favoutitesService = GIFFavouritesService(cachingService: self.gifCachingService)
     self.viewModel = HomeViewModel(apiService: self.gifApiService)
     self.collectionHandler = GIFCollectionViewHandler(collectionView: self.collectionView,
                                                       gifService: self.gifService,
+                                                      favouriteService: self.favoutitesService,
                                                       viewModel: self.viewModel,
                                                       delegate: self)
   }
@@ -175,11 +183,18 @@ extension HomeViewController: UISearchBarDelegate {
 
 // MARK:- Conformance to `GIFCollectionViewHandlerDelegate`
 extension HomeViewController: GIFCollectionViewHandlerDelegate {
+  
   func fetchNextBatch() {
     if viewModel.isSearchActive, let searchText = self.searchBar.text {
       self.fetchSearchResults(initialFetch: false, forQuery: searchText)
     } else {
       self.fetchTrending(initialFetch: false)
+    }
+  }
+  
+  func showCellError(errorMessage: String) {
+    DispatchQueue.main.async {
+      UIAlertController.showError(withMessage: errorMessage, onViewController: self)
     }
   }
 }

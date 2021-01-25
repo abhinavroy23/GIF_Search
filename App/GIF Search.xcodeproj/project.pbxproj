@@ -12,6 +12,7 @@
 		8933DEBD25BDB4DE0043DFFB /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DEBC25BDB4DE0043DFFB /* FavouritesViewModel.swift */; };
 		8933DEC225BDB55C0043DFFB /* GIFCollectionVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */; };
 		8933DF6C25BE0AF00043DFFB /* GIFUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DF6B25BE0AF00043DFFB /* GIFUIModel.swift */; };
+		8933DF8A25BE16C90043DFFB /* GIFFavouriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933DF8925BE16C90043DFFB /* GIFFavouriteService.swift */; };
 		89C01ECB25B9DC68006BF235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECA25B9DC68006BF235 /* AppDelegate.swift */; };
 		89C01ECD25B9DC68006BF235 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECC25B9DC68006BF235 /* SceneDelegate.swift */; };
 		89C01ECF25B9DC68006BF235 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C01ECE25B9DC68006BF235 /* HomeViewController.swift */; };
@@ -54,6 +55,7 @@
 		8933DEBC25BDB4DE0043DFFB /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
 		8933DEC125BDB55C0043DFFB /* GIFCollectionVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFCollectionVMProtocol.swift; sourceTree = "<group>"; };
 		8933DF6B25BE0AF00043DFFB /* GIFUIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFUIModel.swift; sourceTree = "<group>"; };
+		8933DF8925BE16C90043DFFB /* GIFFavouriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFFavouriteService.swift; sourceTree = "<group>"; };
 		89C01EC725B9DC68006BF235 /* GIF Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIF Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C01ECA25B9DC68006BF235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89C01ECC25B9DC68006BF235 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				89F78A4E25BB54D400E327EA /* GIFService.swift */,
 				89F78A4925BB549900E327EA /* GIFAPIClient.swift */,
+				8933DF8925BE16C90043DFFB /* GIFFavouriteService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = SOURCE_ROOT;
@@ -390,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8933DF8A25BE16C90043DFFB /* GIFFavouriteService.swift in Sources */,
 				89C01ECF25B9DC68006BF235 /* HomeViewController.swift in Sources */,
 				89F78ABF25BCA4D800E327EA /* HomeViewModel.swift in Sources */,
 				89F78AB725BCA06700E327EA /* UIImage+App.swift in Sources */,

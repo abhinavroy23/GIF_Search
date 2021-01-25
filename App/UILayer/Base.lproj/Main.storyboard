@@ -50,10 +50,15 @@
                                                     <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal">
                                                         <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="default"/>
                                                     </state>
                                                     <state key="selected">
                                                         <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="favouriteAction:" destination="zKp-cV-rlF" eventType="touchUpInside" id="Kh9-tv-COg"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -68,7 +73,6 @@
                                         <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="192" height="176"/>
                                         <connections>
-                                            <outlet property="favouriteAction" destination="u6h-3j-c7a" id="GX9-u8-s0f"/>
                                             <outlet property="favouriteButton" destination="u6h-3j-c7a" id="w4V-qg-3oE"/>
                                             <outlet property="gifImageView" destination="gzL-h1-bAi" id="HZG-Ch-s07"/>
                                         </connections>
@@ -161,7 +165,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="192" height="176"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="46u-xz-ZF3" customClass="SDAnimatedImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="46u-xz-ZF3" customClass="SDAnimatedImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="192" height="176"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
@@ -175,10 +179,15 @@
                                                     <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <state key="normal">
                                                         <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
                                                     </state>
                                                     <state key="selected">
                                                         <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="favouriteAction:" destination="4pf-CF-Am6" eventType="touchUpInside" id="PN7-4Q-zBn"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -193,7 +202,6 @@
                                         <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="192" height="176"/>
                                         <connections>
-                                            <outlet property="favouriteAction" destination="BEs-Tv-aIh" id="6L1-uc-6zo"/>
                                             <outlet property="favouriteButton" destination="BEs-Tv-aIh" id="h4T-8S-4dr"/>
                                             <outlet property="gifImageView" destination="46u-xz-ZF3" id="Sr0-ZW-NKa"/>
                                         </connections>

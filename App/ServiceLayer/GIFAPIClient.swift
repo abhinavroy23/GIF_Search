@@ -12,7 +12,6 @@ import GIFFoundation
 
 private let GIFApiKey_Encoded: String = "ZHRUbDR5eFVYa3F1OG9OdEJVd2V2WUtjdGRnYW5mdjU="
 private let baseURL_Encoded: String = "aHR0cHM6Ly9hcGkuZ2lwaHkuY29tL3YxL2dpZnM="
-private let random_id: String = "2740b473600db7ca466d74686fddb3d4"
 
 // MARK:- GIFAPIRequest - Conformance to `Request` Procotol from `NetworkInterfaces`
 enum GIFAPIRequest: Request {
@@ -25,9 +24,9 @@ enum GIFAPIRequest: Request {
     let apiKey = GIFApiKey_Encoded.base64Decoded()
     switch self {
     case .trendingGifs(let offset, let limit):
-      return URL(string: "\(baseUrl)/trending?api_key=\(apiKey)&offset=\(offset)&limit=\(limit)&random_id=\(random_id)")
+      return URL(string: "\(baseUrl)/trending?api_key=\(apiKey)&offset=\(offset)&limit=\(limit)")
     case .searchGifs(let query, let offset, let limit):
-      return URL(string:"\(baseUrl)/search?api_key=\(apiKey)&q=\(query)&offset=\(offset)&limit=\(limit)&random_id=\(random_id)")
+      return URL(string:"\(baseUrl)/search?api_key=\(apiKey)&q=\(query)&offset=\(offset)&limit=\(limit)")
     }
   }
   

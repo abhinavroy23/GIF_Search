@@ -6,11 +6,25 @@
 //
 
 import Foundation
+import GIFInterfaces
 
-struct FavouritesViewModel {
+class FavouritesViewModel {
+  
+  var favouriteService: GIFFavouritesInterface
+
   
   var dataSource: GIFUIModel = GIFUIModel()
   
+  init(favouriteService: GIFFavouritesInterface) {
+    self.favouriteService = favouriteService
+  }
+  
+  func fetchFavourites(withCompletion completion: () -> ()) {
+    let urls = favouriteService.getAllCachingKeys()
+    // Process cachingkeys to make UI compliant model
+    self.dataSource = GIFUIModel.init(withGifUrls: urls.map { $0.absoluteString })
+    completion()
+  }
 }
 
 // MARK:- Conformance to GIFColllctionVMProtocol
