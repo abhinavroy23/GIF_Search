@@ -59,8 +59,11 @@ struct GIFFavouritesService {
     // Create favourites folder
     _ = GIFFavouritesService.favouritesDirectoryURL
     
-    // Create favourite Plist
+    // Create favourite file
     _ = GIFFavouritesService.favouritesPlistURL
+    
+    // Flush file
+    NSMutableArray().write(toFile: GIFFavouritesService.favouritesPlistURL.path, atomically: true)
   }
   
 }

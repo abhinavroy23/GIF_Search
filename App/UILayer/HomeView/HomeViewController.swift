@@ -7,7 +7,7 @@
 
 import UIKit
 import GIFInterfaces
-import NetworkInterfaces
+import GIFNetwork
 import SDWebImage
 
 // MARK:- HomeViewController
@@ -38,10 +38,10 @@ class HomeViewController: UIViewController {
   private var networkService: NetworkInterface!
   private var gifApiService: GIFAPIInterface!
   private var favoutitesService: GIFFavouritesInterface!
-  private var collectionHandler: GIFCollectionViewHandler!
+  var collectionHandler: GIFCollectionViewHandler!
   
   /// ViewModel
-  private var viewModel: HomeViewModel!
+  var viewModel: HomeViewModel!
   private var isSearchActive: Bool = false {
     didSet {
       viewModel.isSearchActive = self.isSearchActive
@@ -82,11 +82,12 @@ class HomeViewController: UIViewController {
 // MARK:- View Model interaction
 extension HomeViewController {
   
-  func fetchTrending(initialFetch: Bool) {
+  func fetchTrending(initialFetch: Bool, completion: (()->())? = nil) {
     DispatchQueue.main.async {
       initialFetch ? self.showLoadingView(true) : self.showInfinityLoadingView(true)
     }
     viewModel.fetchTrending(initialFetch: initialFetch) { (success, error) in
+      completion?()
       DispatchQueue.main.async {
         initialFetch ? self.showLoadingView(false) : self.showInfinityLoadingView(false)
         // Check if success else show error
@@ -104,11 +105,12 @@ extension HomeViewController {
     }
   }
   
-  func fetchSearchResults(initialFetch: Bool, forQuery query: String) {
+  func fetchSearchResults(initialFetch: Bool, forQuery query: String, completion: (()->())? = nil) {
     DispatchQueue.main.async {
       initialFetch ? self.showLoadingView(true) : self.showInfinityLoadingView(true)
     }
     viewModel.fetchSearchResults(initialFetch: initialFetch, forQuery: query) { (success, error) in
+      completion?()
       DispatchQueue.main.async {
         initialFetch ? self.showLoadingView(false) : self.showInfinityLoadingView(false)
         // check if success else show error

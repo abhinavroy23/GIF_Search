@@ -33,7 +33,7 @@ class GIFCell: UICollectionViewCell {
   
   // MARK:- Instance variables
   private var indexPath: IndexPath?
-  private weak var delegate: GIFCellDelegate?
+  weak var delegate: GIFCellDelegate?
   
   // MARK:- Default life cycle methods
   override func awakeFromNib() {
@@ -46,6 +46,7 @@ class GIFCell: UICollectionViewCell {
     self.configureViewForReuse()
   }
   
+  // MARK:- Configuration methods
   func configureCell(withUrl url: URL,
                      gifService: GIFInterface,
                      delegate: GIFCellDelegate?,

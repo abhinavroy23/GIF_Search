@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 # ――― Summary ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-s.name      = "NetworkInterfaces"
+s.name      = "GIFNetwork"
 s.version   = "0.0.1"
 s.summary   = "Networking protocols"
 s.homepage  = "https://github.com/abhinavroy23/GIF-Search.git"
@@ -21,6 +21,6 @@ s.source    = { :git => "https://github.com/abhinavroy23/GIF-Search.git", :branc
 
 # ――― Contents ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-s.source_files = ['NetworkInterfaces/**/*.swift', 'NetworkInterfaces/**/*.{h,m}']
+s.source_files = ['GIFNetwork/**/*.swift', 'GIFNetwork/**/*.{h,m}']
 
 end

@@ -23,7 +23,7 @@ class FavouritesViewController: UIViewController {
   private var collectionHandler: GIFCollectionViewHandler!
   
   /// ViewModel
-  private var viewModel: FavouritesViewModel!
+  var viewModel: FavouritesViewModel!
   
   // MARK:- Default lifecycle methods
   override func viewDidLoad() {
@@ -50,13 +50,15 @@ class FavouritesViewController: UIViewController {
                                                       delegate: self)
   }
   
-  func fetchFavourites() {
+  func fetchFavourites(completionHandler completion: (()->())? = nil) {
     viewModel.fetchFavourites {
+      completion?()
       collectionHandler.reloadCollectionView()
     }
   }
 }
 
+// MARK:- Conformance to GIFCollectionViewHandlerDelegate
 extension FavouritesViewController: GIFCollectionViewHandlerDelegate {
   func showCellError(errorMessage: String) {
     DispatchQueue.main.async {
@@ -65,6 +67,7 @@ extension FavouritesViewController: GIFCollectionViewHandlerDelegate {
   }
   
   func fetchNextBatch() {
-    
+    // TODO: Update in future
+    // To support pagination in Favourites view
   }
 }

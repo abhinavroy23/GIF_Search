@@ -5,13 +5,11 @@
 //  Created by Roy, Abhinav on 23/01/21.
 //
 
-import NetworkInterfaces
-
 private let InvalidURL: String = "The URL seems to be invalid. Please check and try again!"
 private let InvalidData: String = "The data seems to be invalid. Please try again!"
 
 //MARK: Service error
-enum GIFNetworkError: Error {
+public enum GIFNetworkError: Error {
   case invalidUrl
   case invalidData
   
@@ -31,14 +29,17 @@ private enum RequestType: String {
 }
 
 //MARK: Networking Service - URL Session Client
-final class GIFNetworkService: NetworkInterface {
+final public class GIFNetworkService: NetworkInterface {
+  
+  /// Empty inittializer
+  public init() { }
   
   /// Implementation of GET API from `NetworkInterface`
   /// - Parameters:
   ///   - request: Request object that conforms to `Request` protocol
   ///   - session: configurable `URLSession`
   ///   - completion: completion handler, fired on the event of success/failure
-  func get(request: Request, session: URLSession = URLSession.shared, completion: @escaping (Result<Data>) -> Void) {
+  public func get(request: Request, session: URLSession = URLSession.shared, completion: @escaping (Result<Data>) -> Void) {
     if let url = request.url{
       session.dataTask(with: url) { (data, response, error) in
         if let error = error {
@@ -61,7 +62,7 @@ final class GIFNetworkService: NetworkInterface {
   ///   - request: Request object that conforms to `Request` protocol
   ///   - session: configurable `URLSession`
   ///   - completion: completion handler, fired on the event of success/failure
-  func post(request: Request, session: URLSession, completion: @escaping (Result<Data>) -> Void) {
+  public func post(request: Request, session: URLSession, completion: @escaping (Result<Data>) -> Void) {
     if let url = request.url{
       var req : URLRequest = URLRequest.init(url: url)
       req.httpMethod = RequestType.post.rawValue
@@ -100,7 +101,7 @@ final class GIFNetworkService: NetworkInterface {
   ///   - request: Request object that conforms to `Request` protocol
   ///   - session: configurable `URLSession`
   ///   - completion: completion handler, fired on the event of success/failure
-  func put(request: Request, session: URLSession, completion: @escaping (Result<Data>) -> Void) {
+  public func put(request: Request, session: URLSession, completion: @escaping (Result<Data>) -> Void) {
     if let url = request.url{
       var req : URLRequest = URLRequest.init(url: url)
       req.httpMethod = RequestType.put.rawValue
