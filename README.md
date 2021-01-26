@@ -15,35 +15,35 @@ An iOS app to search and share gifs - powered by Giphy.
 ![High Level Design](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HighLevelDesign.png?raw=true)
 
 ## System Walkthrough
-- iPhone - [here](https://youtu.be/pWQdvQQNhQM)
-- iPad - [here](https://youtu.be/SR6xgEbJFcA)
+- iPhone - [https://youtu.be/pWQdvQQNhQM](https://youtu.be/pWQdvQQNhQM)
+- iPad - [https://youtu.be/SR6xgEbJFcA](https://youtu.be/SR6xgEbJFcA)
 
-<!-- ## App Preview
-![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HomePage.mov.gif?raw=true)
-![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search.mov.gif)
-![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites.mov.gif)
-![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details.mov.gif)
--->
+## App Preview
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HomePage.mov.gif?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search.mov.gif?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites.mov.gif?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details.mov.gif?raw=true" width="300"></img>
+
 ## Screenshots - iPhone
-![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPad.png?raw=true)
-![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPad.png?raw=true)
-![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPad.png?raw=true)
-![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPad.png?raw=true)
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPhone.png?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPhone.png?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPhone.png?raw=true" width="300"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPhone.png?raw=true" width="300"></img>
 
-## Preview - iPad
-![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPhone.png?raw=true)
-![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPhone.png?raw=true)
-![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPhone.png?raw=true)
-![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPhone.png?raw=true)
+## Screenshots - iPad
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPad.png?raw=true" width="400"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPad.png?raw=true" width="400"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPad.png?raw=true" width="400"></img>
+<img src="https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPad.png?raw=true" width="400"></img>
 
 ## Test Coverage
-![Coverage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/GIF_Search_UT_Coverage.png)
+![Coverage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/GIF_Search_UT_Coverage.png?raw=true)
 
 ## Future Enhancements
-1. Host frameworks on private cocoa pod infrastructer and add interdependecy between modules
-2. Improve closure based code coverage
-3. Improve search user experience
-4. Support Landscape device orientation
+1. Host frameworks on private cocoa pod infrastructure and add inter-dependecy between modules.
+2. Improve code coverage for asynchronous code.
+3. Improve search user experience.
+4. Support Landscape device orientation.
 
 ## Contact
 [Abhinav Roy](https://www.linkedin.com/in/abhinavroy23/)
