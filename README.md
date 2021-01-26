@@ -11,18 +11,30 @@ An iOS app to search and share gifs - powered by Giphy.
 ## Build
 - Simulator - [here](https://github.com/abhinavroy23/GIF_Search/tree/main/build/GIF%20Search.app)
 
-## Screenshots
+## High Level Design
+![High Level Design](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HighLevelDesign.png?raw=true)
+
+## System Walkthrough
+- iPhone - [here](https://youtu.be/pWQdvQQNhQM)
+- iPad - [here](https://youtu.be/SR6xgEbJFcA)
+
+<!-- ## App Preview
 ![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HomePage.mov.gif?raw=true)
 ![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search.mov.gif)
 ![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites.mov.gif)
 ![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details.mov.gif)
+-->
+## Screenshots - iPhone
+![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPad.png?raw=true)
+![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPad.png?raw=true)
+![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPad.png?raw=true)
+![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPad.png?raw=true)
 
-## System Walkthrough
-- iPhone - [here]()
-- iPad - [here]()
-
-## High Level Design
-
+## Preview - iPad
+![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Homepage_iPhone.png?raw=true)
+![Search](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Search_iPhone.png?raw=true)
+![Favourites](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Favourites_iPhone.png?raw=true)
+![Details](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/Details_iPhone.png?raw=true)
 
 ## Test Coverage
 ![Coverage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/GIF_Search_UT_Coverage.png)
