@@ -4,9 +4,12 @@ An iOS app to search and share gifs - powered by Giphy.
 ## Setup - How to run the app?
 
 1. Clone this repo
-1. Open shell window and navigate to `{Project_Dir}/App/` directory
-1. Run `pod install`
-1. Open `App/GIF Search.xcworkspace` and run the project on selected device or simulator
+2. Open shell window and navigate to `{Project_Dir}/App/` directory
+3. Run `pod install`
+4. Open `App/GIF Search.xcworkspace` and run the project on selected device or simulator
+
+## Build
+- Simulator - [here](https://github.com/abhinavroy23/GIF_Search/tree/main/build/GIF%20Search.app)
 
 ## Screenshots
 ![Homepage](https://github.com/abhinavroy23/GIF_Search/blob/main/docs/HomePage.mov.gif?raw=true)
