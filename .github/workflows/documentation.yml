@@ -14,6 +14,7 @@ jobs:
       - name: Generate Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
+          run: echo "$(pwd)"
           inputs: "./App"
           module-name: "GIF Search"
           output: "Documentation/swiftdoc"
